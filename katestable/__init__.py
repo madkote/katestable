@@ -2,10 +2,25 @@
 # -*- coding: utf-8 -*-
 # katestable
 '''
-K-testable package
+:author:  madkote
+:contact: madkote(at)bluewin.ch
+:version: 0.1.0
+
+K-testable
+----------------------
+:TODO add here some description
+
+Todo's:
+----------------------
+- add tests
+
+History
+------------------
+0.1.0  - initial release
 '''
 
-__all__ = ['KDFA', 'KTMachine']
-__author__ = "madkote <madkote@bluewin.ch>"
-
 from kt import *
+
+__all__ = []
+__author__ = "madkote <madkote@bluewin.ch>"
+__version__ = "0.1.0"

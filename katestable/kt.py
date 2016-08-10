@@ -2,12 +2,21 @@
 # -*- coding: utf-8 -*-
 # katestable.kt
 '''
+:author:  madkote
+:contact: madkote(at)bluewin.ch
+
 K-testable languages with DFA
+----------------------
+:TODO add here some description
+
+Todo's:
+----------------------
+- public methods
+- Katestable class with full functionality
 '''
 
 __all__ = ['KDFA', 'KTMachine']
 __author__ = "madkote <madkote@bluewin.ch>"
-__version__ = "0.1.0"
 
 
 class DFA(object):
