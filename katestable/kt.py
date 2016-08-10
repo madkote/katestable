@@ -6,11 +6,11 @@
 :contact: madkote(at)bluewin.ch
 
 K-testable languages with DFA
-----------------------
+-----------------------------
 :TODO add here some description
 
-Todo's:
-----------------------
+Todo's
+------
 - public methods
 - Katestable class with full functionality
 '''
