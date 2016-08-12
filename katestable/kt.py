@@ -9,16 +9,20 @@ K-testable languages with DFA
 -----------------------------
 :TODO add here some description
 
-Todo's
-------
-- public methods
-- Katestable class with full functionality
+Usage
+-----
+>>> from katestable import KTestable
+>>> kt = KTestable.build(3, [...])
+>>> kt.detect('abba')
 '''
 
-__all__ = ['KDFA', 'KTMachine']
-__author__ = "madkote <madkote@bluewin.ch>"
+__all__ = ['KTestable']
+__author__ = 'madkote <madkote(at)bluewin.ch>'
 
 
+# ============================================================================
+# INNER
+# ============================================================================
 class DFA(object):
     '''
     (Simple) Deterministic Finite Automata.
@@ -58,9 +62,9 @@ class KDFA(DFA):
     '''
     DFA built from K-Testable-Machine
     >>> dfa = DFA.build(ktmachine)
-    >>> dfa.detect("00011100")
+    >>> dfa.detect('00011100')
     '''
-    STATE_FAILURE = "FAILURE"
+    STATE_FAILURE = 'FAILURE'
 
     def _detect_char(self, c):
         '''
@@ -109,7 +113,7 @@ class KDFA(DFA):
         :return: DFA from K-Testable-Machine
         '''
         accepts = []
-        start = ""
+        start = ''
         failure = KDFA.STATE_FAILURE
         states = [start, failure]
         trans = {}
@@ -140,7 +144,7 @@ class KDFA(DFA):
             for i in range(0, len(x)):
                 char = x[i]
                 if i == 0:
-                    source = ""
+                    source = ''
                 else:
                     source = x[:i]
                 dest = x[:i+1]
@@ -236,34 +240,51 @@ class KTMachine(object):
         return KTMachine(k, alphabet, prefixes, shortstr, suffixes, validstr)
 
 
+# ============================================================================
+# PUBLIC
+# ============================================================================
+class KTestable(object):
+    def __init__(self, kdfa):
+        self.kdfa = kdfa
+
+    def detect(self, s):
+        return self.kdfa.detect(s)
+
+    @staticmethod
+    def build(k, language):
+        return KTestable(KDFA.build(KTMachine.build(k, language)))
+
+
+# ============================================================================
+# DEMO
+# ============================================================================
 def demo():
     '''
     Simple demo
     '''
     k = 3
-    language = ["a", "aa", "abba", "abbbba", "aaabbbbba"]
-    ktmachine = KTMachine.build(k, language)
-    kdfa = KDFA.build(ktmachine)
-    print "=" * 30
-    print "=== Demo"
-    print "=" * 30
-    print "K-value = {0}".format(k)
+    language = ['a', 'aa', 'abba', 'abbbba', 'aaabbbbba']
+    kt = KTestable.build(k, language)
+    print '=' * 30
+    print '=== Demo'
+    print '=' * 30
+    print 'K-value = {0}'.format(k)
     for x in sorted(language):
-        print "{0:20}".format(x)
+        print '{0:20}'.format(x)
     # test
     language = {x: True for x in language}
-    language.update({"aba": False,
-                     "abc": False,
-                     "aaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa": False,
-                     "aabbbaaac": False,
-                     "aaaaabbbbbbbbba": True})
-    print "=" * 30
-    print "=== Detect"
-    print "=" * 30
+    language.update({'aba': False,
+                     'abc': False,
+                     'aaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa': False,
+                     'aabbbaaac': False,
+                     'aaaaabbbbbbbbba': True})
+    print '=' * 30
+    print '=== Detect'
+    print '=' * 30
     for x in sorted(language):
-        result = kdfa.detect(x)
-        print "{0:20} = {1}".format(x, result)
+        result = kt.detect(x)
+        print '{0:20} = {1}'.format(x, result)
         assert (language[x] == result)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     demo()
