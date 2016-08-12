@@ -244,14 +244,33 @@ class KTMachine(object):
 # PUBLIC
 # ============================================================================
 class KTestable(object):
+    '''
+    K-Testable public facade.
+    '''
     def __init__(self, kdfa):
+        '''
+        The constructor with DFA
+        :param kdfa: K-testable DFA
+        '''
         self.kdfa = kdfa
 
     def detect(self, s):
+        '''
+        Detect the string (string should belong to the language).
+        :param s: String to be analyzed
+        :return: True if the string is detected and belongs to the language,
+            otherwise False.
+        '''
         return self.kdfa.detect(s)
 
     @staticmethod
     def build(k, language):
+        '''
+        Build the machine from a language.
+        :param k: K value
+        :param language: The language as a list of language's words
+        :return: The K-Testable
+        '''
         return KTestable(KDFA.build(KTMachine.build(k, language)))
 
 
