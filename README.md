@@ -1,19 +1,22 @@
-# katestable
-K-testable machine
-==================
+## K-testable machine
 K-testable languages with DFA.
 
-Usage
-=====
->>> from katestable import KTestable
->>> kt = KTestable.build(3, [...])
->>> kt.detect('abba')
+## Usage
+```
+from katestable import KTestable
+kt = KTestable.build(3, [...])
+kt.detect('abba')
+```
 
-Requirements
-============
+## Requirements
 Works out-of-the-box.
 
-Install
-=======
->>> make test
->>> python setup.py install
+## Install
+```
+make test
+python setup.py install
+```
+
+## TODO
+- [ ] documentation
+- [ ] more unit tests
