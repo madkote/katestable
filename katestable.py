@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# katestable.kt
+# katestable
 '''
 :author:  madkote
 :contact: madkote(at)bluewin.ch
@@ -16,8 +16,11 @@ Usage
 >>> kt.detect('abba')
 '''
 
+VERSION = (0, 2, 0)
+
 __all__ = ['KTestable']
 __author__ = 'madkote <madkote(at)bluewin.ch>'
+__version__ = '.'.join(str(x) for x in VERSION)
 
 
 # ============================================================================

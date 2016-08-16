@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# tests.test_kt
+# test_katestable
 '''
 :author:  madkote
 :contact: madkote(at)bluewin.ch
 
-KT tests
+KTestable tests
 --------
 unit and integration tests
 
@@ -15,6 +15,8 @@ unit and integration tests
 import unittest
 
 from katestable import KTestable
+
+__author__ = 'madkote <madkote(at)bluewin.ch>'
 
 
 class Test_KTestable(unittest.TestCase):
