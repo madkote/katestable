@@ -287,12 +287,12 @@ def demo():
     k = 3
     language = ['a', 'aa', 'abba', 'abbbba', 'aaabbbbba']
     kt = KTestable.build(k, language)
-    print '=' * 30
-    print '=== Demo'
-    print '=' * 30
-    print 'K-value = {0}'.format(k)
+    print('=' * 30)
+    print('=== Demo')
+    print('=' * 30)
+    print(f'K-value = {k}')
     for x in sorted(language):
-        print '{0:20}'.format(x)
+        print('{0:20}'.format(x))
     # test
     language = {x: True for x in language}
     language.update({'aba': False,
@@ -300,12 +300,12 @@ def demo():
                      'aaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaa': False,
                      'aabbbaaac': False,
                      'aaaaabbbbbbbbba': True})
-    print '=' * 30
-    print '=== Detect'
-    print '=' * 30
+    print('=' * 30)
+    print('=== Detect')
+    print('=' * 30)
     for x in sorted(language):
         result = kt.detect(x)
-        print '{0:20} = {1}'.format(x, result)
+        print('{0:20} = {1}'.format(x, result))
         assert (language[x] == result)
 
 if __name__ == '__main__':
