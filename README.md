@@ -13,10 +13,7 @@ Works out-of-the-box.
 
 ## Install
 ```
+make install
 make test
-python setup.py install
+make build
 ```
-
-## TODO
-- [ ] documentation
-- [ ] more unit tests

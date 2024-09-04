@@ -16,7 +16,7 @@ Usage
 >>> kt.detect('abba')
 '''
 
-VERSION = (0, 2, 0)
+VERSION = (0, 2, 1)
 
 __all__ = ['KTestable']
 __author__ = 'madkote <madkote(at)bluewin.ch>'
@@ -122,14 +122,14 @@ class KDFA(DFA):
         trans = {}
         # merge I&C and create states as prefixes from I&C
         for x in set(ktmachine.prefixes) | set(ktmachine.shortstr):
-            for i in range(1, len(x)+1):
+            for i in range(1, len(x) + 1):
                 state = x[:i]
                 if state not in states:
                     states.append(state)
         # create states from valid strings T as suff(k-1) and pref(k-1)
         for x in ktmachine.validstr:
             if len(x) > 1:
-                tpref = x[:len(x)-1]
+                tpref = x[:len(x) - 1]
                 tsuff = x[1:]
                 if tpref not in states:
                     states.append(tpref)
@@ -150,14 +150,14 @@ class KDFA(DFA):
                     source = ''
                 else:
                     source = x[:i]
-                dest = x[:i+1]
+                dest = x[:i + 1]
                 trans[source][char] = dest
         # transitions for set of valid strings T
         for x in ktmachine.validstr:
             if len(x) < 2:
                 # suffix and prefix are required
                 continue
-            source = x[:len(x)-1]
+            source = x[:len(x) - 1]
             dest = x[1:]
             char = x[-1]
             trans[source][char] = dest
@@ -222,17 +222,17 @@ class KTMachine(object):
                 if word not in shortstr:
                     shortstr.append(word)
             # get all prefixes and suffixes (k-1)
-            if len(word) >= (k-1):
-                p = word[:k-1]
-                s = word[len(word)-k+1:]
+            if len(word) >= (k - 1):
+                p = word[:k - 1]
+                s = word[len(word) - k + 1:]
                 if p not in prefixes:
                     prefixes.append(p)
                 if s not in suffixes:
                     suffixes.append(s)
             # extract allowed strings (size == k)
             if len(word) >= k:
-                for i in range(0, len(word)-k+1):
-                    tword = word[i:i+k]
+                for i in range(0, len(word) - k + 1):
+                    tword = word[i:i + k]
                     if tword not in validstr:
                         validstr.append(tword)
             # build alphabet by each character
@@ -306,7 +306,8 @@ def demo():
     for x in sorted(language):
         result = kt.detect(x)
         print('{0:20} = {1}'.format(x, result))
-        assert (language[x] == result)
+        assert (language[x] == result)  # nosec B101
+
 
 if __name__ == '__main__':
     demo()

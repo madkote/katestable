@@ -1,0 +1,86 @@
+[project]
+name = "katestable"
+description = "Python K-Testable machine"
+authors = [{name = "madkote", email = "madkote@bluewin.ch"}]
+license= {text = "MIT License"}
+keywords = ["NLP", "DFA"]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: NLP",
+  "Topic :: DFA"
+]
+dynamic = ["version", "readme"]
+requires-python = ">=3.9, <4"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "bandit",
+  "build",
+  "flake8",
+  "Flake8-pyproject",
+  "pdm",
+  "pytest",
+  "pytest-asyncio",
+  "pytest-cov",
+  "setuptools",
+  "twine",
+  "wheel"
+]
+
+[project.urls]
+homepage = "https://github.com/madkote/katestable"
+repository = "https://github.com/madkote/katestable"
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "katestable.__version__"}
+readme = {file = "README.md", content-type = "text/markdown"}
+
+[tool.setuptools]
+py-modules = ["katestable"]
+
+[tool.setuptools.packages.find]
+include = ["katestable*"]
+exclude = [".gitignore", ".settings", "scripts", "tests", "venv"]
+
+
+[tool.bandit]
+targets = ["katestable.py"]
+recursive = true
+
+
+[tool.flake8]
+ignore = ["E252", "F401", "F403", "F405"]
+exclude = [".git", "build", "scripts", "venv"]
+max-line-length = 90
+count = true
+statistics = true
+
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "auto"
+addopts = "-v --cov=katestable --cov-report term-missing --cache-clear"
+log_cli = false
+log_cli_level = "info"
+pythonpath = "."
+testpaths = ["tests"]
+
+
+[tool.pdm]
+distribution = true
+PDM_IGNORE_ACTIVE_VENV = true
+
+[tool.pdm.scripts]
+bandit = "bandit katestable.py -r -c pyproject.toml"
+lint = { composite = ["flake8", "bandit"]}
+test-unit = "pytest"
+test = { composite = ["lint", "test-unit"], env_file = "ENV"}
+build = "python -m build -w"
